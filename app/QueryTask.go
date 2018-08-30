@@ -24,6 +24,9 @@ type /*B(Task)*/ QueryTask /*E(Task)*/ struct {
 	/*E(Task.Base)*/
 
 	/*B(Input)*/ /*E(Input)*/
+	/*B(Input.tags)*/
+	Tags string `json:"tags" title:"标签"`
+	/*E(Input.tags)*/
 	/*B(Input.endTime)*/
 	EndTime interface{} `json:"endTime" title:"开始时间(秒)"`
 	/*E(Input.endTime)*/

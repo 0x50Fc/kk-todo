@@ -18,6 +18,9 @@ type /*B(Task)*/ SetTask /*E(Task)*/ struct {
 	/*E(Task.Base)*/
 
 	/*B(Input)*/ /*E(Input)*/
+	/*B(Input.tags)*/
+	Tags interface{} `json:"tags" title:"标签 逗号分割"`
+	/*E(Input.tags)*/
 	/*B(Input.options)*/
 	Options interface{} `json:"options" title:"其他数据"`
 	/*E(Input.options)*/

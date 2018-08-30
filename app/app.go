@@ -20,10 +20,10 @@ func Open(app micro.IApp) micro.IApp {
 	/*B(App.Service.User)*/
 	{
 		s := UserService{}
-		app.Use(&UserJoinTask{},&s)
 		app.Use(&UserRemoveTask{},&s)
 		app.Use(&UserGetTask{},&s)
 		app.Use(&UserQueryTask{},&s)
+		app.Use(&UserJoinTask{},&s)
 	}
 	/*E(App.Service.User)*/
 

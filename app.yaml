@@ -19,6 +19,9 @@ services:
           - name: endTime
             title: 结束时间(秒)
             type: long
+          - name: tags
+            title: 标签 逗号分割
+            type: string
           - name: options
             title: 其他数据
             type: object
@@ -40,6 +43,9 @@ services:
           - name: title
             title: 说明
             type: string
+          - name: tags
+            title: 标签 逗号分割
+            type: object
           - name: endTime
             title: 结束时间(秒)
             type: object
@@ -86,6 +92,9 @@ services:
           - name: q
             type: string
             title: 关键字
+          - name: tags
+            title: 标签
+            type: string
           - name: orderBy
             type: string
             title: desc 降序默认 asc 升序
