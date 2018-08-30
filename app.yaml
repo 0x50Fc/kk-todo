@@ -1,0 +1,242 @@
+
+title: TODO
+type: kk/micro
+
+services:
+  TODO:
+    title: TODO
+    tasks:
+      Create:
+        title: 创建
+        name: todo/create
+        input:
+          - name: uid
+            title: 用户ID
+            type: long
+          - name: title
+            title: 说明
+            type: string
+          - name: endTime
+            title: 结束时间(秒)
+            type: long
+          - name: options
+            title: 其他数据
+            type: object
+        output:
+          - name: todo
+            title: TODO
+            omitempty: true
+            type: Todo
+      Set:
+        title: 修改
+        name: todo/set
+        input:
+          - name: id
+            title: ID
+            type: long
+          - name: uid
+            title: 用户ID
+            type: object
+          - name: title
+            title: 说明
+            type: string
+          - name: endTime
+            title: 结束时间(秒)
+            type: object
+          - name: options
+            title: 其他数据
+            type: object
+        output:
+          - name: todo
+            title: TODO
+            omitempty: true
+            type: Todo
+      Get:
+        title: 获取
+        name: todo/get
+        input:
+          - name: id
+            title: ID
+            type: long
+        output:
+          - name: todo
+            title: TODO
+            omitempty: true
+            type: Todo
+      Remove:
+        title: 删除
+        name: todo/remove
+        input:
+          - name: id
+            title: ID
+            type: long
+        output:
+          - name: todo
+            title: TODO
+            omitempty: true
+            type: Todo
+      Query:
+        title: 查询
+        name: todo/query
+        type: query
+        input:
+          - name: id
+            title: 钱包ID
+            type: long
+          - name: q
+            type: string
+            title: 关键字
+          - name: orderBy
+            type: string
+            title: desc 降序默认 asc 升序
+          - name: startTime
+            type: object
+            title: 开始时间(秒)
+          - name: endTime
+            type: object
+            title: 开始时间(秒)
+        output:
+          - name: todos
+            title: TODO
+            omitempty: true
+            type: Todo[]
+
+  User:
+    title: 用户服务
+    tasks:
+      UserJoin:
+        title: 加入
+        name: user/join
+        input:
+          - name: id
+            title: TODO ID
+            type: long
+          - name: uid
+            title: 用户ID
+            type: long
+          - name: title
+            title: 说明
+            type: string
+          - name: type
+            title: 类型
+            type: int
+          - name: options
+            title: 其他数据
+            type: object
+        output:
+          - name: user
+            title: 用户
+            omitempty: true
+            type: User
+      UserRemove:
+        title: 删除
+        name: user/remove
+        input:
+          - name: id
+            title: TODO ID
+            type: long
+          - name: uid
+            title: 用户ID
+            type: long
+        output:
+          - name: user
+            title: 用户
+            omitempty: true
+            type: User
+      UserGet:
+        title: 获取
+        name: user/get
+        input:
+          - name: id
+            title: TODO ID
+            type: long
+          - name: uid
+            title: 用户ID
+            type: long
+        output:
+          - name: user
+            title: 用户
+            omitempty: true
+            type: User
+      UserQuery:
+        title: 查询
+        name: user/query
+        type: query
+        input:
+          - name: id
+            title: TODO ID
+            type: long
+          - name: uid
+            title: 用户ID
+            type: long
+          - name: type
+            title: 类型 多个逗号分割
+            type: string
+          - name: orderBy
+            type: string
+            title: desc 降序默认 asc 升序
+        output:
+          - name: users
+            title: 用户
+            omitempty: true
+            type: User[]
+            
+            
+objects:
+  Todo:
+    title: TODO
+    name: todo
+    type: db
+    fields:
+      - name: title
+        type: string
+        length: 255
+        title: 说明
+      - name: uid
+        type: long
+        title: 用户ID
+        index: asc
+      - name: endTime
+        type: long
+        title: 结束时间
+        index: desc
+      - name: options
+        type: object
+        title: 其他数据
+      - name: ctime
+        type: long
+        title: 创建时间
+      - name: mtime
+        type: long
+        title: 修改时间
+  User:
+    title: 用户
+    name: user
+    type: db
+    fields:
+      - name: uid
+        type: long
+        title: 用户ID
+        index: asc
+      - name: todoId
+        type: long
+        title: TODO ID
+        index: asc
+      - name: title
+        type: string
+        length: 255
+        title: 说明
+      - name: type
+        type: int
+        title: 类型
+        index: asc
+      - name: options
+        type: object
+        title: 其他数据
+      - name: ctime
+        type: long
+        title: 创建时间
+      - name: mtime
+        type: long
+        title: 修改时间
+        
