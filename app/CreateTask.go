@@ -1,7 +1,7 @@
 package app
 
 /*B(Import)*/
-	/*E(Import)*/
+/*E(Import)*/
 
 type /*B(Result)*/ CreateTaskResult /*E(Result)*/ struct {
 	/*B(Result.Base)*/
@@ -24,9 +24,6 @@ type /*B(Task)*/ CreateTask /*E(Task)*/ struct {
 	/*B(Input.options)*/
 	Options interface{} `json:"options" title:"其他数据"`
 	/*E(Input.options)*/
-	/*B(Input.endTime)*/
-	EndTime int64 `json:"endTime" title:"结束时间(秒)"`
-	/*E(Input.endTime)*/
 	/*B(Input.title)*/
 	Title string `json:"title" title:"说明"`
 	/*E(Input.title)*/

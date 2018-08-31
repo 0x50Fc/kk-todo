@@ -1,8 +1,9 @@
 package app
 
 /*B(Import)*/
-	import "github.com/hailongz/kk-micro/micro"
-	/*E(Import)*/
+import "github.com/hailongz/kk-micro/micro"
+
+/*E(Import)*/
 
 type /*B(Result)*/ QueryTaskResult /*E(Result)*/ struct {
 	/*B(Result.Base)*/
@@ -13,9 +14,6 @@ type /*B(Result)*/ QueryTaskResult /*E(Result)*/ struct {
 	/*B(Output.todos)*/
 	Todos []Todo `json:"todos,omitempty" title:"TODO"`
 	/*E(Output.todos)*/
-	/*B(Output.users)*/
-	Users []User `json:"users,omitempty" title:"用户"`
-	/*E(Output.users)*/
 }
 
 type /*B(Task)*/ QueryTask /*E(Task)*/ struct {
@@ -27,17 +25,11 @@ type /*B(Task)*/ QueryTask /*E(Task)*/ struct {
 	/*B(Input.tags)*/
 	Tags string `json:"tags" title:"标签"`
 	/*E(Input.tags)*/
-	/*B(Input.endTime)*/
-	EndTime interface{} `json:"endTime" title:"开始时间(秒)"`
-	/*E(Input.endTime)*/
-	/*B(Input.startTime)*/
-	StartTime interface{} `json:"startTime" title:"开始时间(秒)"`
-	/*E(Input.startTime)*/
 	/*B(Input.q)*/
 	Q string `json:"q" title:"关键字"`
 	/*E(Input.q)*/
 	/*B(Input.orderBy)*/
-	OrderBy string `json:"orderBy" title:"desc 降序默认 asc 升序"`
+	OrderBy string `json:"orderBy" title:"desc 降序默认 asc 升序 endTime 结束时间升序"`
 	/*E(Input.orderBy)*/
 	/*B(Input.type)*/
 	Type string `json:"type" title:"类型 多个逗号分割"`
@@ -46,7 +38,7 @@ type /*B(Task)*/ QueryTask /*E(Task)*/ struct {
 	Uid int64 `json:"uid" title:"用户ID"`
 	/*E(Input.uid)*/
 	/*B(Input.id)*/
-	Id int64 `json:"id" title:"钱包ID"`
+	Id int64 `json:"id" title:"TODO ID"`
 	/*E(Input.id)*/
 
 	/*B(Task.Result)*/

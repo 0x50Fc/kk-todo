@@ -1,0 +1,72 @@
+{
+	"user": {
+		"title": {
+			"title": "说明",
+			"name": "title",
+			"type": "string",
+			"length": 255
+		},
+		"type": {
+			"index": "asc",
+			"name": "type",
+			"type": "int",
+			"title": "类型"
+		},
+		"options": {
+			"name": "options",
+			"type": "object",
+			"title": "其他数据"
+		},
+		"ctime": {
+			"name": "ctime",
+			"type": "long",
+			"title": "创建时间"
+		},
+		"mtime": {
+			"name": "mtime",
+			"type": "long",
+			"title": "修改时间"
+		},
+		"uid": {
+			"name": "uid",
+			"type": "long",
+			"title": "用户ID",
+			"index": "asc"
+		},
+		"todoId": {
+			"name": "todoId",
+			"type": "long",
+			"title": "TODO ID",
+			"index": "asc"
+		}
+	},
+	"todo": {
+		"title": {
+			"type": "string",
+			"length": 255,
+			"title": "说明",
+			"name": "title"
+		},
+		"uid": {
+			"title": "用户ID",
+			"index": "asc",
+			"name": "uid",
+			"type": "long"
+		},
+		"options": {
+			"name": "options",
+			"type": "object",
+			"title": "其他数据"
+		},
+		"ctime": {
+			"name": "ctime",
+			"type": "long",
+			"title": "创建时间"
+		},
+		"mtime": {
+			"type": "long",
+			"title": "修改时间",
+			"name": "mtime"
+		}
+	}
+}

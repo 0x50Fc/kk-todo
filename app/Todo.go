@@ -1,8 +1,9 @@
 package app
 
 /*B(Import)*/
-	import "github.com/hailongz/kk-lib/db"
-	/*E(Import)*/
+import "github.com/hailongz/kk-lib/db"
+
+/*E(Import)*/
 
 type /*B(Object)*/ Todo /*E(Object)*/ struct {
 	/*B(Object.Base)*/
@@ -19,9 +20,6 @@ type /*B(Object)*/ Todo /*E(Object)*/ struct {
 	/*B(Property.options)*/
 	Options interface{} `json:"options" title:"其他数据"`
 	/*E(Property.options)*/
-	/*B(Property.endTime)*/
-	EndTime int64 `json:"endTime" title:"结束时间" index:"desc"`
-	/*E(Property.endTime)*/
 	/*B(Property.uid)*/
 	Uid int64 `json:"uid" title:"用户ID" index:"asc"`
 	/*E(Property.uid)*/
