@@ -1,0 +1,44 @@
+{
+	"stage": {
+		"ctime": {
+			"name": "ctime",
+			"type": "long",
+			"title": "创建时间"
+		},
+		"title": {
+			"name": "title",
+			"type": "string",
+			"length": 255,
+			"title": "说明"
+		},
+		"endTime": {
+			"name": "endTime",
+			"type": "long",
+			"title": "结束时间",
+			"index": "asc"
+		},
+		"type": {
+			"name": "type",
+			"type": "int",
+			"title": "类型",
+			"index": "asc"
+		},
+		"status": {
+			"name": "status",
+			"type": "int",
+			"title": "状态",
+			"index": "asc"
+		},
+		"eid": {
+			"name": "eid",
+			"type": "long",
+			"title": "实体ID",
+			"index": "asc"
+		},
+		"options": {
+			"name": "options",
+			"type": "object",
+			"title": "其他数据"
+		}
+	}
+}

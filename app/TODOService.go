@@ -8,7 +8,7 @@ import (
 
 	"github.com/hailongz/kk-lib/db"
 	"github.com/hailongz/kk-lib/dynamic"
-	"github.com/hailongz/kk-tag/tag"
+	"github.com/hailongz/kk-micro/tag"
 )
 
 /*B(Import)*/
