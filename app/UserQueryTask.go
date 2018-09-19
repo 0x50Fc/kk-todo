@@ -24,11 +24,8 @@ type /*B(Task)*/ UserQueryTask /*E(Task)*/ struct {
 	/*B(Input.orderBy)*/
 	OrderBy string `json:"orderBy" title:"desc 降序默认 asc 升序"`
 	/*E(Input.orderBy)*/
-	/*B(Input.type)*/
-	Type string `json:"type" title:"类型 多个逗号分割"`
-	/*E(Input.type)*/
 	/*B(Input.uid)*/
-	Uid int64 `json:"uid" title:"用户ID"`
+	Uid interface{} `json:"uid" title:"用户ID"`
 	/*E(Input.uid)*/
 	/*B(Input.id)*/
 	Id int64 `json:"id" title:"TODO ID"`

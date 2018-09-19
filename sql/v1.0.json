@@ -1,16 +1,26 @@
 {
-	"user": {
+	"todo": {
+		"mtime": {
+			"title": "修改时间",
+			"name": "mtime",
+			"type": "long"
+		},
 		"title": {
-			"title": "说明",
 			"name": "title",
 			"type": "string",
-			"length": 255
+			"length": 255,
+			"title": "说明"
 		},
-		"type": {
+		"uid": {
+			"type": "long",
+			"title": "用户ID",
 			"index": "asc",
-			"name": "type",
-			"type": "int",
-			"title": "类型"
+			"name": "uid"
+		},
+		"userCount": {
+			"title": "用户数量",
+			"name": "userCount",
+			"type": "int"
 		},
 		"options": {
 			"name": "options",
@@ -21,12 +31,9 @@
 			"name": "ctime",
 			"type": "long",
 			"title": "创建时间"
-		},
-		"mtime": {
-			"name": "mtime",
-			"type": "long",
-			"title": "修改时间"
-		},
+		}
+	},
+	"user": {
 		"uid": {
 			"name": "uid",
 			"type": "long",
@@ -38,25 +45,17 @@
 			"type": "long",
 			"title": "TODO ID",
 			"index": "asc"
-		}
-	},
-	"todo": {
+		},
 		"title": {
 			"type": "string",
 			"length": 255,
 			"title": "说明",
 			"name": "title"
 		},
-		"uid": {
-			"title": "用户ID",
-			"index": "asc",
-			"name": "uid",
-			"type": "long"
-		},
 		"options": {
+			"title": "其他数据",
 			"name": "options",
-			"type": "object",
-			"title": "其他数据"
+			"type": "object"
 		},
 		"ctime": {
 			"name": "ctime",
@@ -64,9 +63,9 @@
 			"title": "创建时间"
 		},
 		"mtime": {
+			"name": "mtime",
 			"type": "long",
-			"title": "修改时间",
-			"name": "mtime"
+			"title": "修改时间"
 		}
 	}
 }

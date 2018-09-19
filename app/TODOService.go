@@ -12,9 +12,8 @@ import (
 )
 
 /*B(Import)*/
-import "github.com/hailongz/kk-micro/micro"
-
-/*E(Import)*/
+	import "github.com/hailongz/kk-micro/micro"
+	/*E(Import)*/
 
 type /*B(Service)*/ TODOService /*E(Service)*/ struct {
 
@@ -33,7 +32,7 @@ func (S *TODOService) GetTitle() string {
 /*B(Handle.Remove)*/
 /*删除*/
 func (S *TODOService) HandleRemoveTask(a micro.IApp, task *RemoveTask) error {
-	/*E(Handle.Remove)*/
+/*E(Handle.Remove)*/
 	//TODO
 
 	if task.Id == 0 {
@@ -94,7 +93,7 @@ func (S *TODOService) HandleRemoveTask(a micro.IApp, task *RemoveTask) error {
 /*B(Handle.Get)*/
 /*获取*/
 func (S *TODOService) HandleGetTask(a micro.IApp, task *GetTask) error {
-	/*E(Handle.Get)*/
+/*E(Handle.Get)*/
 	//TODO
 
 	if task.Id == 0 {
@@ -140,7 +139,7 @@ func (S *TODOService) HandleGetTask(a micro.IApp, task *GetTask) error {
 /*B(Handle.Set)*/
 /*修改*/
 func (S *TODOService) HandleSetTask(a micro.IApp, task *SetTask) error {
-	/*E(Handle.Set)*/
+/*E(Handle.Set)*/
 	//TODO
 
 	if task.Id == 0 {
@@ -244,7 +243,7 @@ func (S *TODOService) HandleSetTask(a micro.IApp, task *SetTask) error {
 /*B(Handle.Create)*/
 /*创建*/
 func (S *TODOService) HandleCreateTask(a micro.IApp, task *CreateTask) error {
-	/*E(Handle.Create)*/
+/*E(Handle.Create)*/
 	//TODO
 
 	conn, prefix, err := micro.DBOpen(a, "db")
@@ -283,7 +282,7 @@ func (S *TODOService) HandleCreateTask(a micro.IApp, task *CreateTask) error {
 /*B(Handle.Query)*/
 /*查询*/
 func (S *TODOService) HandleQueryTask(a micro.IApp, task *QueryTask) error {
-	/*E(Handle.Query)*/
+/*E(Handle.Query)*/
 	//TODO
 
 	conn, prefix, err := micro.DBOpen(a, "dbr")

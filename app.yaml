@@ -114,9 +114,6 @@ services:
           - name: title
             title: 说明
             type: string
-          - name: type
-            title: 类型
-            type: int
           - name: options
             title: 其他数据
             type: object
@@ -165,10 +162,7 @@ services:
             type: long
           - name: uid
             title: 用户ID
-            type: long
-          - name: type
-            title: 类型 多个逗号分割
-            type: string
+            type: object
           - name: orderBy
             type: string
             title: desc 降序默认 asc 升序
@@ -193,6 +187,9 @@ objects:
         type: long
         title: 用户ID
         index: asc
+      - name: userCount
+        type: int
+        title: 用户数量
       - name: options
         type: object
         title: 其他数据
@@ -219,10 +216,6 @@ objects:
         type: string
         length: 255
         title: 说明
-      - name: type
-        type: int
-        title: 类型
-        index: asc
       - name: options
         type: object
         title: 其他数据

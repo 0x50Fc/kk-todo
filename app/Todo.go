@@ -1,9 +1,8 @@
 package app
 
 /*B(Import)*/
-import "github.com/hailongz/kk-lib/db"
-
-/*E(Import)*/
+	import "github.com/hailongz/kk-lib/db"
+	/*E(Import)*/
 
 type /*B(Object)*/ Todo /*E(Object)*/ struct {
 	/*B(Object.Base)*/
@@ -11,6 +10,9 @@ type /*B(Object)*/ Todo /*E(Object)*/ struct {
 	/*E(Object.Base)*/
 
 	/*B(Property)*/ /*E(Property)*/
+	/*B(Property.userCount)*/
+	UserCount int `json:"userCount" title:"用户数量"`
+	/*E(Property.userCount)*/
 	/*B(Property.mtime)*/
 	Mtime int64 `json:"mtime" title:"修改时间"`
 	/*E(Property.mtime)*/

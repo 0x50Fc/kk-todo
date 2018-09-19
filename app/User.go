@@ -19,9 +19,6 @@ type /*B(Object)*/ User /*E(Object)*/ struct {
 	/*B(Property.options)*/
 	Options interface{} `json:"options" title:"其他数据"`
 	/*E(Property.options)*/
-	/*B(Property.type)*/
-	Type int `json:"type" title:"类型" index:"asc"`
-	/*E(Property.type)*/
 	/*B(Property.title)*/
 	Title string `json:"title" title:"说明" length:"255"`
 	/*E(Property.title)*/
