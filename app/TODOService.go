@@ -270,6 +270,7 @@ func (S *TODOService) HandleCreateTask(a micro.IApp, task *CreateTask) error {
 	prefix = Prefix(a, prefix, task.Pid)
 
 	v := Todo{}
+	v.Pid = task.Pid
 	v.Uid = task.Uid
 	v.Title = task.Title
 	v.Options = task.Options
