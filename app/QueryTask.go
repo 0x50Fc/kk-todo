@@ -1,8 +1,9 @@
 package app
 
 /*B(Import)*/
-	import "github.com/hailongz/kk-micro/micro"
-	/*E(Import)*/
+import "github.com/hailongz/kk-micro/micro"
+
+/*E(Import)*/
 
 type /*B(Result)*/ QueryTaskResult /*E(Result)*/ struct {
 	/*B(Result.Base)*/
@@ -40,7 +41,7 @@ type /*B(Task)*/ QueryTask /*E(Task)*/ struct {
 	Q string `json:"q" title:"关键字"`
 	/*E(Input.q)*/
 	/*B(Input.orderBy)*/
-	OrderBy string `json:"orderBy" title:"desc 降序默认 asc 升序 endTime 结束时间升序"`
+	OrderBy string `json:"orderBy" title:"desc 降序默认 asc 升序 status 状态升序"`
 	/*E(Input.orderBy)*/
 	/*B(Input.uid)*/
 	Uid interface{} `json:"uid" title:"创建者ID"`

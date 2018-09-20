@@ -127,7 +127,7 @@ services:
             type: long
           - name: orderBy
             type: string
-            title: desc 降序默认 asc 升序 endTime 结束时间升序
+            title: desc 降序默认 asc 升序 status 状态升序
         output:
           - name: todos
             title: TODO
