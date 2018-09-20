@@ -18,6 +18,12 @@ type /*B(Task)*/ CreateTask /*E(Task)*/ struct {
 	/*E(Task.Base)*/
 
 	/*B(Input)*/ /*E(Input)*/
+	/*B(Input.maxUserCount)*/
+	MaxUserCount int64 `json:"maxUserCount" title:"最大用户数限制"`
+	/*E(Input.maxUserCount)*/
+	/*B(Input.pid)*/
+	Pid int64 `json:"pid" title:"父级ID"`
+	/*E(Input.pid)*/
 	/*B(Input.tags)*/
 	Tags string `json:"tags" title:"标签 逗号分割"`
 	/*E(Input.tags)*/

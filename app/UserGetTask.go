@@ -18,11 +18,14 @@ type /*B(Task)*/ UserGetTask /*E(Task)*/ struct {
 	/*E(Task.Base)*/
 
 	/*B(Input)*/ /*E(Input)*/
+	/*B(Input.pid)*/
+	Pid int64 `json:"pid" title:"父级ID"`
+	/*E(Input.pid)*/
 	/*B(Input.uid)*/
 	Uid int64 `json:"uid" title:"用户ID"`
 	/*E(Input.uid)*/
 	/*B(Input.id)*/
-	Id int64 `json:"id" title:"TODO ID"`
+	Id int64 `json:"id" title:"任务ID"`
 	/*E(Input.id)*/
 
 	/*B(Task.Result)*/

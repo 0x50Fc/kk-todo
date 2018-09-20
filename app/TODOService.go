@@ -23,7 +23,7 @@ type /*B(Service)*/ TODOService /*E(Service)*/ struct {
 
 /*B(Title)*/
 func (S *TODOService) GetTitle() string {
-	return "TODO"
+	return "任务"
 }
 
 /*E(Title)*/
@@ -44,6 +44,8 @@ func (S *TODOService) HandleRemoveTask(a micro.IApp, task *RemoveTask) error {
 	if err != nil {
 		return err
 	}
+
+	prefix = Prefix(a, prefix, task.Pid)
 
 	v := Todo{}
 
@@ -68,6 +70,14 @@ func (S *TODOService) HandleRemoveTask(a micro.IApp, task *RemoveTask) error {
 		err = db.Transaction(conn, func(conn db.Database) error {
 
 			_, err = db.Delete(conn, &v, prefix)
+
+			if err != nil {
+				return err
+			}
+
+			user := User{}
+
+			_, err = db.DeleteWithSQL(conn, &user, prefix, " WHERE todoId=?", v.Id)
 
 			if err != nil {
 				return err
@@ -105,6 +115,8 @@ func (S *TODOService) HandleGetTask(a micro.IApp, task *GetTask) error {
 	if err != nil {
 		return err
 	}
+
+	prefix = Prefix(a, prefix, task.Pid)
 
 	v := Todo{}
 
@@ -151,6 +163,8 @@ func (S *TODOService) HandleSetTask(a micro.IApp, task *SetTask) error {
 	if err != nil {
 		return err
 	}
+
+	prefix = Prefix(a, prefix, task.Pid)
 
 	v := Todo{}
 
@@ -252,6 +266,8 @@ func (S *TODOService) HandleCreateTask(a micro.IApp, task *CreateTask) error {
 		return err
 	}
 
+	prefix = Prefix(a, prefix, task.Pid)
+
 	v := Todo{}
 	v.Uid = task.Uid
 	v.Title = task.Title
@@ -291,24 +307,40 @@ func (S *TODOService) HandleQueryTask(a micro.IApp, task *QueryTask) error {
 		return err
 	}
 
+	prefix = Prefix(a, prefix, task.Pid)
+
 	var v = Todo{}
+
+	user := User{}
 
 	sql := bytes.NewBuffer(nil)
 
 	args := []interface{}{}
 
-	sql.WriteString(" WHERE 1")
+	sql.WriteString(" as todo WHERE 1")
 
 	if task.Id != 0 {
 		sql.WriteString(" AND id=?")
 		args = append(args, task.Id)
 	}
 
-	if task.Type != "" {
+	if task.Uid != nil {
+		sql.WriteString(" AND uid=?")
+		args = append(args, task.Uid)
+	}
 
-		sql.WriteString(" AND type IN (")
+	if task.Fuid != nil {
+		sql.WriteString(" AND (uid=? OR uid IN (")
+		sql.WriteString(fmt.Sprintf("SELECT uid FROM %s%s WHERE todoId=todo.id AND uid=?", prefix, user.GetName()))
+		sql.WriteString(") as user)")
+		args = append(args, task.Uid, task.Uid)
+	}
 
-		for i, v := range strings.Split(task.Type, ",") {
+	if task.Status != "" {
+
+		sql.WriteString(" AND status IN (")
+
+		for i, v := range strings.Split(task.Status, ",") {
 			if i != 0 {
 				sql.WriteString(",")
 			}
@@ -334,8 +366,6 @@ func (S *TODOService) HandleQueryTask(a micro.IApp, task *QueryTask) error {
 
 	if task.OrderBy == "asc" {
 		sql.WriteString(" ORDER BY id ASC")
-	} else if task.OrderBy == "endTime" {
-		sql.WriteString(" ORDER BY endTime ASC")
 	} else {
 		sql.WriteString(" ORDER BY id DESC")
 	}

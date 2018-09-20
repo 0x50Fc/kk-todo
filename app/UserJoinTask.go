@@ -18,6 +18,12 @@ type /*B(Task)*/ UserJoinTask /*E(Task)*/ struct {
 	/*E(Task.Base)*/
 
 	/*B(Input)*/ /*E(Input)*/
+	/*B(Input.status)*/
+	Status int `json:"status" title:"状态"`
+	/*E(Input.status)*/
+	/*B(Input.pid)*/
+	Pid int64 `json:"pid" title:"父级ID"`
+	/*E(Input.pid)*/
 	/*B(Input.options)*/
 	Options interface{} `json:"options" title:"其他数据"`
 	/*E(Input.options)*/
@@ -31,7 +37,7 @@ type /*B(Task)*/ UserJoinTask /*E(Task)*/ struct {
 	Uid int64 `json:"uid" title:"用户ID"`
 	/*E(Input.uid)*/
 	/*B(Input.id)*/
-	Id int64 `json:"id" title:"TODO ID"`
+	Id int64 `json:"id" title:"任务ID"`
 	/*E(Input.id)*/
 
 	/*B(Task.Result)*/

@@ -1,14 +1,17 @@
 package app
 
-/*B(Import)*/
 import (
 	"bytes"
 	"fmt"
+	"strings"
 	"time"
 
 	"github.com/hailongz/kk-lib/db"
+	"github.com/hailongz/kk-lib/dynamic"
 	"github.com/hailongz/kk-micro/micro"
 )
+
+/*B(Import)*/
 
 /*E(Import)*/
 
@@ -33,7 +36,7 @@ func (S *UserService) HandleUserGetTask(a micro.IApp, task *UserGetTask) error {
 	//TODO
 
 	if task.Id == 0 {
-		return micro.NewError(ERROR_NOT_FOUND_ID, "未找到 TODO ID")
+		return micro.NewError(ERROR_NOT_FOUND_ID, "未找到 任务ID")
 	}
 
 	conn, prefix, err := micro.DBOpen(a, "dbr")
@@ -41,6 +44,8 @@ func (S *UserService) HandleUserGetTask(a micro.IApp, task *UserGetTask) error {
 	if err != nil {
 		return err
 	}
+
+	prefix = Prefix(a, prefix, task.Pid)
 
 	v := User{}
 
@@ -79,7 +84,7 @@ func (S *UserService) HandleUserRemoveTask(a micro.IApp, task *UserRemoveTask) e
 	//TODO
 
 	if task.Id == 0 {
-		return micro.NewError(ERROR_NOT_FOUND_ID, "未找到 TODO ID")
+		return micro.NewError(ERROR_NOT_FOUND_ID, "未找到 任务ID")
 	}
 
 	conn, prefix, err := micro.DBOpen(a, "db")
@@ -87,6 +92,8 @@ func (S *UserService) HandleUserRemoveTask(a micro.IApp, task *UserRemoveTask) e
 	if err != nil {
 		return err
 	}
+
+	prefix = Prefix(a, prefix, task.Pid)
 
 	todo := Todo{}
 	user := User{}
@@ -137,6 +144,10 @@ func (S *UserService) HandleUserRemoveTask(a micro.IApp, task *UserRemoveTask) e
 			return micro.NewError(ERROR_NOT_FOUND, "未找到用户")
 		}
 
+		if todo.MaxUserCount > 0 && todo.UserCount+1 > todo.MaxUserCount {
+			return micro.NewError(ERROR_MAX_COUNT, "已超出最大用户数限制")
+		}
+
 		todo.Mtime = time.Now().Unix()
 		todo.UserCount = todo.UserCount - 1
 
@@ -171,7 +182,7 @@ func (S *UserService) HandleUserJoinTask(a micro.IApp, task *UserJoinTask) error
 	//TODO
 
 	if task.Id == 0 {
-		return micro.NewError(ERROR_NOT_FOUND_ID, "未找到 TODO ID")
+		return micro.NewError(ERROR_NOT_FOUND_ID, "未找到 任务ID")
 	}
 
 	conn, prefix, err := micro.DBOpen(a, "db")
@@ -179,6 +190,8 @@ func (S *UserService) HandleUserJoinTask(a micro.IApp, task *UserJoinTask) error
 	if err != nil {
 		return err
 	}
+
+	prefix = Prefix(a, prefix, task.Pid)
 
 	todo := Todo{}
 	user := User{}
@@ -225,6 +238,40 @@ func (S *UserService) HandleUserJoinTask(a micro.IApp, task *UserJoinTask) error
 				return err
 			}
 
+			keys := map[string]bool{"mtime": true, "status": true}
+
+			user.Mtime = time.Now().Unix()
+			user.Status = task.Status
+
+			if task.Title != "" {
+				user.Title = task.Title
+				keys["title"] = true
+			}
+
+			if task.Options != nil {
+
+				keys["options"] = true
+				options := map[string]interface{}{}
+
+				dynamic.Each(user.Options, func(key interface{}, value interface{}) bool {
+					options[dynamic.StringValue(key, "")] = value
+					return true
+				})
+
+				dynamic.Each(task.Options, func(key interface{}, value interface{}) bool {
+					options[dynamic.StringValue(key, "")] = value
+					return true
+				})
+
+				user.Options = options
+			}
+
+			_, err = db.UpdateWithKeys(conn, &user, prefix, keys)
+
+			if err != nil {
+				return err
+			}
+
 			return nil
 
 		} else {
@@ -240,6 +287,7 @@ func (S *UserService) HandleUserJoinTask(a micro.IApp, task *UserJoinTask) error
 		user.Title = task.Title
 		user.Ctime = todo.Mtime
 		user.Mtime = user.Ctime
+		user.Status = task.Status
 
 		_, err = db.Insert(conn, &user, prefix)
 
@@ -277,6 +325,8 @@ func (S *UserService) HandleUserQueryTask(a micro.IApp, task *UserQueryTask) err
 		return err
 	}
 
+	prefix = Prefix(a, prefix, task.Pid)
+
 	var v = User{}
 
 	sql := bytes.NewBuffer(nil)
@@ -290,6 +340,18 @@ func (S *UserService) HandleUserQueryTask(a micro.IApp, task *UserQueryTask) err
 	if task.Uid != nil {
 		sql.WriteString(" AND uid=?")
 		args = append(args, task.Uid)
+	}
+
+	if task.Status != "" {
+		sql.WriteString(" AND status IN (")
+		for i, v := range strings.Split(task.Status, ",") {
+			if i != 0 {
+				sql.WriteString(",")
+			}
+			sql.WriteString("?")
+			args = append(args, v)
+		}
+		sql.WriteString(")")
 	}
 
 	if task.OrderBy == "asc" {

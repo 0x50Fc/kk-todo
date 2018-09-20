@@ -1,37 +1,42 @@
 package app
 
 import (
+	"fmt"
+
+	"github.com/hailongz/kk-lib/dynamic"
 	"github.com/hailongz/kk-micro/micro"
-	"github.com/hailongz/kk-micro/stage"
-	"github.com/hailongz/kk-micro/tag"
 )
 
 func Open(app micro.IApp) micro.IApp {
 
 	/*B(App.Service)*/ /*E(App.Service)*/
+	/*B(App.Service.Tag)*/
+	{
+		s := TagService{}
+		app.Use(&TagCounterQueryTask{},&s)
+		app.Use(&TagCounterGetTask{},&s)
+		app.Use(&TagQueryTask{},&s)
+	}
+	/*E(App.Service.Tag)*/
 	/*B(App.Service.TODO)*/
 	{
 		s := TODOService{}
+		app.Use(&SetTask{},&s)
+		app.Use(&GetTask{},&s)
 		app.Use(&RemoveTask{},&s)
 		app.Use(&QueryTask{},&s)
 		app.Use(&CreateTask{},&s)
-		app.Use(&SetTask{},&s)
-		app.Use(&GetTask{},&s)
 	}
 	/*E(App.Service.TODO)*/
 	/*B(App.Service.User)*/
 	{
 		s := UserService{}
-		app.Use(&UserGetTask{},&s)
-		app.Use(&UserQueryTask{},&s)
 		app.Use(&UserJoinTask{},&s)
 		app.Use(&UserRemoveTask{},&s)
+		app.Use(&UserGetTask{},&s)
+		app.Use(&UserQueryTask{},&s)
 	}
 	/*E(App.Service.User)*/
-
-	tag.Open(app)
-
-	stage.Open(app)
 
 	//默认数据服务
 	app.AddDefaultService(&micro.DBService{})
@@ -43,4 +48,10 @@ func Open(app micro.IApp) micro.IApp {
 	app.Handle(&micro.StartupTask{})
 
 	return app
+}
+
+func Prefix(app micro.IApp, prefix string, pid int64) string {
+	count := uint(dynamic.IntValue(dynamic.Get(app.Config(), "tableCount"), 1))
+	iid := uint(pid & 0x0ffffffff)
+	return fmt.Sprintf("%s%d_", prefix, (iid%count)+1)
 }

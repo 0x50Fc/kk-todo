@@ -1,15 +1,18 @@
 
-title: TODO
+title: 任务
 type: kk/micro
 
 services:
   TODO:
-    title: TODO
+    title: 任务
     tasks:
       Create:
         title: 创建
         name: todo/create
         input:
+          - name: pid
+            title: 父级ID
+            type: long
           - name: uid
             title: 用户ID
             type: long
@@ -19,6 +22,9 @@ services:
           - name: tags
             title: 标签 逗号分割
             type: string
+          - name: maxUserCount
+            title: 最大用户数限制
+            type: long
           - name: options
             title: 其他数据
             type: object
@@ -31,11 +37,20 @@ services:
         title: 修改
         name: todo/set
         input:
+          - name: pid
+            title: 父级ID
+            type: long
           - name: id
             title: ID
             type: long
           - name: uid
             title: 用户ID
+            type: object
+          - name: maxUserCount
+            title: 最大用户数限制
+            type: object
+          - name: status
+            title: 状态
             type: object
           - name: title
             title: 说明
@@ -55,6 +70,9 @@ services:
         title: 获取
         name: todo/get
         input:
+          - name: pid
+            title: 父级ID
+            type: long
           - name: id
             title: ID
             type: long
@@ -67,6 +85,9 @@ services:
         title: 删除
         name: todo/remove
         input:
+          - name: pid
+            title: 父级ID
+            type: long
           - name: id
             title: ID
             type: long
@@ -80,15 +101,30 @@ services:
         name: todo/query
         type: query
         input:
-          - name: id
-            title: TODO ID
+          - name: pid
+            title: 父级ID
             type: long
+          - name: id
+            title: 任务ID
+            type: long
+          - name: uid
+            title: 创建者ID
+            type: object
+          - name: fuid
+            title: 创建者ID/加入用户ID
+            type: object
           - name: q
             type: string
             title: 关键字
           - name: tags
             title: 标签
             type: string
+          - name: status
+            title: 状态 多个逗号分割
+            type: string
+          - name: minUserCount
+            title: 最小剩余用户数
+            type: long
           - name: orderBy
             type: string
             title: desc 降序默认 asc 升序 endTime 结束时间升序
@@ -105,8 +141,11 @@ services:
         title: 加入
         name: user/join
         input:
+          - name: pid
+            title: 父级ID
+            type: long
           - name: id
-            title: TODO ID
+            title: 任务ID
             type: long
           - name: uid
             title: 用户ID
@@ -114,6 +153,9 @@ services:
           - name: title
             title: 说明
             type: string
+          - name: status
+            title: 状态
+            type: int
           - name: options
             title: 其他数据
             type: object
@@ -126,8 +168,11 @@ services:
         title: 删除
         name: user/remove
         input:
+          - name: pid
+            title: 父级ID
+            type: long
           - name: id
-            title: TODO ID
+            title: 任务ID
             type: long
           - name: uid
             title: 用户ID
@@ -141,8 +186,11 @@ services:
         title: 获取
         name: user/get
         input:
+          - name: pid
+            title: 父级ID
+            type: long
           - name: id
-            title: TODO ID
+            title: 任务ID
             type: long
           - name: uid
             title: 用户ID
@@ -157,12 +205,18 @@ services:
         name: user/query
         type: query
         input:
+          - name: pid
+            title: 父级ID
+            type: long
           - name: id
-            title: TODO ID
+            title: 任务ID
             type: long
           - name: uid
             title: 用户ID
             type: object
+          - name: status
+            title: 状态多个逗号分割
+            type: string
           - name: orderBy
             type: string
             title: desc 降序默认 asc 升序
@@ -171,6 +225,32 @@ services:
             title: 用户
             omitempty: true
             type: User[]
+  Tag:
+    title: 任务标签
+    tasks:
+      TagQuery:
+        title: 查询标签
+        name: tag/query
+        input:
+          - name: pid
+            title: 父级ID
+            type: long
+      TagCounterQuery:
+        title: 查询标签计数
+        name: tag/counter/query
+        input:
+          - name: pid
+            title: 父级ID
+            type: long
+      TagCounterGet:
+        title: 获取标签计数
+        name: tag/counter/get
+        input:
+          - name: pid
+            title: 父级ID
+            type: long
+
+
             
             
 objects:
@@ -179,6 +259,10 @@ objects:
     name: todo
     type: db
     fields:
+      - name: pid
+        title: 父级ID
+        type: long
+        index: asc
       - name: title
         type: string
         length: 255
@@ -187,9 +271,16 @@ objects:
         type: long
         title: 用户ID
         index: asc
-      - name: userCount
+      - name: status
         type: int
+        title: 状态
+        index: asc
+      - name: userCount
+        type: long
         title: 用户数量
+      - name: maxUserCount
+        type: long
+        title: 最大用户数 0为不限制
       - name: options
         type: object
         title: 其他数据
@@ -204,18 +295,26 @@ objects:
     name: user
     type: db
     fields:
+      - name: pid
+        title: 父级ID
+        type: long
+        index: asc
       - name: uid
         type: long
         title: 用户ID
         index: asc
       - name: todoId
         type: long
-        title: TODO ID
+        title: 任务ID
         index: asc
       - name: title
         type: string
         length: 255
         title: 说明
+      - name: status
+        type: int
+        title: 状态
+        index: asc
       - name: options
         type: object
         title: 其他数据

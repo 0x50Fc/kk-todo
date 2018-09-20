@@ -1,8 +1,9 @@
 package app
 
 /*B(Import)*/
-	import "github.com/hailongz/kk-lib/db"
-	/*E(Import)*/
+import "github.com/hailongz/kk-lib/db"
+
+/*E(Import)*/
 
 type /*B(Object)*/ User /*E(Object)*/ struct {
 	/*B(Object.Base)*/
@@ -10,6 +11,12 @@ type /*B(Object)*/ User /*E(Object)*/ struct {
 	/*E(Object.Base)*/
 
 	/*B(Property)*/ /*E(Property)*/
+	/*B(Property.status)*/
+	Status int `json:"status" title:"状态" index:"asc"`
+	/*E(Property.status)*/
+	/*B(Property.pid)*/
+	Pid int64 `json:"pid" title:"父级ID" index:"asc"`
+	/*E(Property.pid)*/
 	/*B(Property.mtime)*/
 	Mtime int64 `json:"mtime" title:"修改时间"`
 	/*E(Property.mtime)*/
@@ -23,7 +30,7 @@ type /*B(Object)*/ User /*E(Object)*/ struct {
 	Title string `json:"title" title:"说明" length:"255"`
 	/*E(Property.title)*/
 	/*B(Property.todoId)*/
-	TodoId int64 `json:"todoId" title:"TODO ID" index:"asc"`
+	TodoId int64 `json:"todoId" title:"任务ID" index:"asc"`
 	/*E(Property.todoId)*/
 	/*B(Property.uid)*/
 	Uid int64 `json:"uid" title:"用户ID" index:"asc"`
