@@ -46,7 +46,7 @@ func (S *TODOService) HandleRemoveTask(a micro.IApp, task *RemoveTask) error {
 		return err
 	}
 
-	prefix = Prefix(a, prefix, task.Pid)
+	prefix = Prefix(a, prefix, task.Rid)
 
 	v := Todo{}
 
@@ -117,7 +117,7 @@ func (S *TODOService) HandleGetTask(a micro.IApp, task *GetTask) error {
 		return err
 	}
 
-	prefix = Prefix(a, prefix, task.Pid)
+	prefix = Prefix(a, prefix, task.Rid)
 
 	v := Todo{}
 
@@ -165,7 +165,7 @@ func (S *TODOService) HandleSetTask(a micro.IApp, task *SetTask) error {
 		return err
 	}
 
-	prefix = Prefix(a, prefix, task.Pid)
+	prefix = Prefix(a, prefix, task.Rid)
 
 	v := Todo{}
 
@@ -267,9 +267,10 @@ func (S *TODOService) HandleCreateTask(a micro.IApp, task *CreateTask) error {
 		return err
 	}
 
-	prefix = Prefix(a, prefix, task.Pid)
+	prefix = Prefix(a, prefix, task.Rid)
 
 	v := Todo{}
+	v.Rid = task.Rid
 	v.Pid = task.Pid
 	v.Uid = task.Uid
 	v.Title = task.Title
@@ -309,7 +310,7 @@ func (S *TODOService) HandleQueryTask(a micro.IApp, task *QueryTask) error {
 		return err
 	}
 
-	prefix = Prefix(a, prefix, task.Pid)
+	prefix = Prefix(a, prefix, task.Rid)
 
 	var v = Todo{}
 
@@ -324,6 +325,11 @@ func (S *TODOService) HandleQueryTask(a micro.IApp, task *QueryTask) error {
 	if task.Id != 0 {
 		sql.WriteString(" AND id=?")
 		args = append(args, task.Id)
+	}
+
+	if task.Pid != nil {
+		sql.WriteString(" AND pid=?")
+		args = append(args, task.Pid)
 	}
 
 	if task.Uid != nil {

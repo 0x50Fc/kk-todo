@@ -1,7 +1,7 @@
 package app
 
 /*B(Import)*/
-	/*E(Import)*/
+/*E(Import)*/
 
 type /*B(Result)*/ UserJoinTaskResult /*E(Result)*/ struct {
 	/*B(Result.Base)*/
@@ -18,12 +18,12 @@ type /*B(Task)*/ UserJoinTask /*E(Task)*/ struct {
 	/*E(Task.Base)*/
 
 	/*B(Input)*/ /*E(Input)*/
+	/*B(Input.rid)*/
+	Rid int64 `json:"rid" title:"根级ID"`
+	/*E(Input.rid)*/
 	/*B(Input.status)*/
 	Status int `json:"status" title:"状态"`
 	/*E(Input.status)*/
-	/*B(Input.pid)*/
-	Pid int64 `json:"pid" title:"父级ID"`
-	/*E(Input.pid)*/
 	/*B(Input.options)*/
 	Options interface{} `json:"options" title:"其他数据"`
 	/*E(Input.options)*/

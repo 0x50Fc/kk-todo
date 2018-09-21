@@ -13,28 +13,28 @@ func Open(app micro.IApp) micro.IApp {
 	/*B(App.Service.Tag)*/
 	{
 		s := TagService{}
-		app.Use(&TagCounterQueryTask{},&s)
 		app.Use(&TagCounterGetTask{},&s)
 		app.Use(&TagQueryTask{},&s)
+		app.Use(&TagCounterQueryTask{},&s)
 	}
 	/*E(App.Service.Tag)*/
 	/*B(App.Service.TODO)*/
 	{
 		s := TODOService{}
-		app.Use(&SetTask{},&s)
 		app.Use(&GetTask{},&s)
 		app.Use(&RemoveTask{},&s)
 		app.Use(&QueryTask{},&s)
 		app.Use(&CreateTask{},&s)
+		app.Use(&SetTask{},&s)
 	}
 	/*E(App.Service.TODO)*/
 	/*B(App.Service.User)*/
 	{
 		s := UserService{}
-		app.Use(&UserJoinTask{},&s)
-		app.Use(&UserRemoveTask{},&s)
 		app.Use(&UserGetTask{},&s)
 		app.Use(&UserQueryTask{},&s)
+		app.Use(&UserJoinTask{},&s)
+		app.Use(&UserRemoveTask{},&s)
 	}
 	/*E(App.Service.User)*/
 
@@ -50,8 +50,8 @@ func Open(app micro.IApp) micro.IApp {
 	return app
 }
 
-func Prefix(app micro.IApp, prefix string, pid int64) string {
+func Prefix(app micro.IApp, prefix string, rid int64) string {
 	count := uint(dynamic.IntValue(dynamic.Get(app.Config(), "tableCount"), 1))
-	iid := uint(pid & 0x0ffffffff)
+	iid := uint(rid & 0x0ffffffff)
 	return fmt.Sprintf("%s%d_", prefix, (iid%count)+1)
 }

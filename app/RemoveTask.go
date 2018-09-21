@@ -21,9 +21,9 @@ type /*B(Task)*/ RemoveTask /*E(Task)*/ struct {
 	/*E(Task.Base)*/
 
 	/*B(Input)*/ /*E(Input)*/
-	/*B(Input.pid)*/
-	Pid int64 `json:"pid" title:"父级ID"`
-	/*E(Input.pid)*/
+	/*B(Input.rid)*/
+	Rid int64 `json:"rid" title:"根级ID"`
+	/*E(Input.rid)*/
 	/*B(Input.uid)*/
 	Uid int64 `json:"uid" title:"用户ID"`
 	/*E(Input.uid)*/

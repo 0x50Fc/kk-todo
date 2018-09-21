@@ -8,10 +8,10 @@ import (
 
 	"github.com/hailongz/kk-lib/db"
 	"github.com/hailongz/kk-lib/dynamic"
-	"github.com/hailongz/kk-micro/micro"
 )
 
 /*B(Import)*/
+import "github.com/hailongz/kk-micro/micro"
 
 /*E(Import)*/
 
@@ -45,7 +45,7 @@ func (S *UserService) HandleUserGetTask(a micro.IApp, task *UserGetTask) error {
 		return err
 	}
 
-	prefix = Prefix(a, prefix, task.Pid)
+	prefix = Prefix(a, prefix, task.Rid)
 
 	v := User{}
 
@@ -93,7 +93,7 @@ func (S *UserService) HandleUserRemoveTask(a micro.IApp, task *UserRemoveTask) e
 		return err
 	}
 
-	prefix = Prefix(a, prefix, task.Pid)
+	prefix = Prefix(a, prefix, task.Rid)
 
 	todo := Todo{}
 	user := User{}
@@ -191,7 +191,7 @@ func (S *UserService) HandleUserJoinTask(a micro.IApp, task *UserJoinTask) error
 		return err
 	}
 
-	prefix = Prefix(a, prefix, task.Pid)
+	prefix = Prefix(a, prefix, task.Rid)
 
 	todo := Todo{}
 	user := User{}
@@ -325,7 +325,7 @@ func (S *UserService) HandleUserQueryTask(a micro.IApp, task *UserQueryTask) err
 		return err
 	}
 
-	prefix = Prefix(a, prefix, task.Pid)
+	prefix = Prefix(a, prefix, task.Rid)
 
 	var v = User{}
 

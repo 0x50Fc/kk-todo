@@ -18,6 +18,9 @@ type /*B(Task)*/ CreateTask /*E(Task)*/ struct {
 	/*E(Task.Base)*/
 
 	/*B(Input)*/ /*E(Input)*/
+	/*B(Input.rid)*/
+	Rid int64 `json:"rid" title:"根级ID"`
+	/*E(Input.rid)*/
 	/*B(Input.maxUserCount)*/
 	MaxUserCount int64 `json:"maxUserCount" title:"最大用户数限制"`
 	/*E(Input.maxUserCount)*/

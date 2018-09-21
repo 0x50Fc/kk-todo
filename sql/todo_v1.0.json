@@ -1,26 +1,25 @@
 {
 	"todo": {
-		"mtime": {
-			"name": "mtime",
-			"type": "long",
-			"title": "修改时间"
-		},
 		"title": {
 			"name": "title",
 			"type": "string",
 			"length": 255,
 			"title": "说明"
 		},
-		"status": {
-			"index": "asc",
-			"name": "status",
-			"type": "int",
-			"title": "状态"
-		},
 		"userCount": {
-			"type": "long",
 			"title": "用户数量",
-			"name": "userCount"
+			"name": "userCount",
+			"type": "long"
+		},
+		"mtime": {
+			"name": "mtime",
+			"type": "long",
+			"title": "修改时间"
+		},
+		"maxUserCount": {
+			"name": "maxUserCount",
+			"type": "long",
+			"title": "最大用户数 0为不限制"
 		},
 		"options": {
 			"name": "options",
@@ -33,10 +32,15 @@
 			"title": "创建时间"
 		},
 		"pid": {
-			"type": "long",
-			"index": "asc",
 			"name": "pid",
-			"title": "父级ID"
+			"title": "父级ID",
+			"type": "long",
+			"index": "asc"
+		},
+		"rid": {
+			"name": "rid",
+			"title": "根级ID",
+			"type": "long"
 		},
 		"uid": {
 			"name": "uid",
@@ -44,29 +48,14 @@
 			"title": "用户ID",
 			"index": "asc"
 		},
-		"maxUserCount": {
-			"name": "maxUserCount",
-			"type": "long",
-			"title": "最大用户数 0为不限制"
+		"status": {
+			"name": "status",
+			"type": "int",
+			"title": "状态",
+			"index": "asc"
 		}
 	},
 	"user": {
-		"ctime": {
-			"name": "ctime",
-			"type": "long",
-			"title": "创建时间"
-		},
-		"mtime": {
-			"name": "mtime",
-			"type": "long",
-			"title": "修改时间"
-		},
-		"pid": {
-			"name": "pid",
-			"title": "父级ID",
-			"type": "long",
-			"index": "asc"
-		},
 		"uid": {
 			"name": "uid",
 			"type": "long",
@@ -74,10 +63,10 @@
 			"index": "asc"
 		},
 		"todoId": {
-			"type": "long",
 			"title": "任务ID",
 			"index": "asc",
-			"name": "todoId"
+			"name": "todoId",
+			"type": "long"
 		},
 		"title": {
 			"name": "title",
@@ -92,9 +81,25 @@
 			"index": "asc"
 		},
 		"options": {
-			"name": "options",
 			"type": "object",
-			"title": "其他数据"
+			"title": "其他数据",
+			"name": "options"
+		},
+		"ctime": {
+			"title": "创建时间",
+			"name": "ctime",
+			"type": "long"
+		},
+		"mtime": {
+			"name": "mtime",
+			"type": "long",
+			"title": "修改时间"
+		},
+		"pid": {
+			"title": "父级ID",
+			"type": "long",
+			"index": "asc",
+			"name": "pid"
 		}
 	}
 }

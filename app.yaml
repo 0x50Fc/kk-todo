@@ -10,6 +10,9 @@ services:
         title: 创建
         name: todo/create
         input:
+          - name: rid
+            title: 根级ID
+            type: long
           - name: pid
             title: 父级ID
             type: long
@@ -37,8 +40,8 @@ services:
         title: 修改
         name: todo/set
         input:
-          - name: pid
-            title: 父级ID
+          - name: rid
+            title: 根级ID
             type: long
           - name: id
             title: ID
@@ -70,8 +73,8 @@ services:
         title: 获取
         name: todo/get
         input:
-          - name: pid
-            title: 父级ID
+          - name: rid
+            title: 根级ID
             type: long
           - name: id
             title: ID
@@ -85,8 +88,8 @@ services:
         title: 删除
         name: todo/remove
         input:
-          - name: pid
-            title: 父级ID
+          - name: rid
+            title: 根级ID
             type: long
           - name: id
             title: ID
@@ -101,9 +104,12 @@ services:
         name: todo/query
         type: query
         input:
+          - name: rid
+            title: 根级ID
+            type: long
           - name: pid
             title: 父级ID
-            type: long
+            type: object
           - name: id
             title: 任务ID
             type: long
@@ -141,8 +147,8 @@ services:
         title: 加入
         name: user/join
         input:
-          - name: pid
-            title: 父级ID
+          - name: rid
+            title: 根级ID
             type: long
           - name: id
             title: 任务ID
@@ -168,8 +174,8 @@ services:
         title: 删除
         name: user/remove
         input:
-          - name: pid
-            title: 父级ID
+          - name: rid
+            title: 根级ID
             type: long
           - name: id
             title: 任务ID
@@ -186,8 +192,8 @@ services:
         title: 获取
         name: user/get
         input:
-          - name: pid
-            title: 父级ID
+          - name: rid
+            title: 根级ID
             type: long
           - name: id
             title: 任务ID
@@ -205,8 +211,8 @@ services:
         name: user/query
         type: query
         input:
-          - name: pid
-            title: 父级ID
+          - name: rid
+            title: 根级ID
             type: long
           - name: id
             title: 任务ID
@@ -232,22 +238,22 @@ services:
         title: 查询标签
         name: tag/query
         input:
-          - name: pid
-            title: 父级ID
+          - name: rid
+            title: 根级ID
             type: long
       TagCounterQuery:
         title: 查询标签计数
         name: tag/counter/query
         input:
-          - name: pid
-            title: 父级ID
+          - name: rid
+            title: 根级ID
             type: long
       TagCounterGet:
         title: 获取标签计数
         name: tag/counter/get
         input:
-          - name: pid
-            title: 父级ID
+          - name: rid
+            title: 根级ID
             type: long
 
 
@@ -263,6 +269,9 @@ objects:
         title: 父级ID
         type: long
         index: asc
+      - name: rid
+        title: 根级ID
+        type: long
       - name: title
         type: string
         length: 255

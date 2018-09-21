@@ -14,9 +14,9 @@ type /*B(Task)*/ TagCounterQueryTask /*E(Task)*/ struct {
 	tag.CounterQueryTask
 
 	/*B(Input)*/ /*E(Input)*/
-	/*B(Input.pid)*/
-	Pid int64 `json:"pid" title:"父级ID"`
-	/*E(Input.pid)*/
+	/*B(Input.rid)*/
+	Rid int64 `json:"rid" title:"根级ID"`
+	/*E(Input.rid)*/
 
 }
 

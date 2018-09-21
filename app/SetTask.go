@@ -18,15 +18,15 @@ type /*B(Task)*/ SetTask /*E(Task)*/ struct {
 	/*E(Task.Base)*/
 
 	/*B(Input)*/ /*E(Input)*/
+	/*B(Input.rid)*/
+	Rid int64 `json:"rid" title:"根级ID"`
+	/*E(Input.rid)*/
 	/*B(Input.status)*/
 	Status interface{} `json:"status" title:"状态"`
 	/*E(Input.status)*/
 	/*B(Input.maxUserCount)*/
 	MaxUserCount interface{} `json:"maxUserCount" title:"最大用户数限制"`
 	/*E(Input.maxUserCount)*/
-	/*B(Input.pid)*/
-	Pid int64 `json:"pid" title:"父级ID"`
-	/*E(Input.pid)*/
 	/*B(Input.tags)*/
 	Tags interface{} `json:"tags" title:"标签 逗号分割"`
 	/*E(Input.tags)*/

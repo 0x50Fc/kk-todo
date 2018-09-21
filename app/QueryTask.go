@@ -1,9 +1,8 @@
 package app
 
 /*B(Import)*/
-import "github.com/hailongz/kk-micro/micro"
-
-/*E(Import)*/
+	import "github.com/hailongz/kk-micro/micro"
+	/*E(Import)*/
 
 type /*B(Result)*/ QueryTaskResult /*E(Result)*/ struct {
 	/*B(Result.Base)*/
@@ -22,6 +21,9 @@ type /*B(Task)*/ QueryTask /*E(Task)*/ struct {
 	/*E(Task.Base)*/
 
 	/*B(Input)*/ /*E(Input)*/
+	/*B(Input.rid)*/
+	Rid int64 `json:"rid" title:"根级ID"`
+	/*E(Input.rid)*/
 	/*B(Input.fuid)*/
 	Fuid interface{} `json:"fuid" title:"创建者ID/加入用户ID"`
 	/*E(Input.fuid)*/
@@ -32,7 +34,7 @@ type /*B(Task)*/ QueryTask /*E(Task)*/ struct {
 	Status string `json:"status" title:"状态 多个逗号分割"`
 	/*E(Input.status)*/
 	/*B(Input.pid)*/
-	Pid int64 `json:"pid" title:"父级ID"`
+	Pid interface{} `json:"pid" title:"父级ID"`
 	/*E(Input.pid)*/
 	/*B(Input.tags)*/
 	Tags string `json:"tags" title:"标签"`

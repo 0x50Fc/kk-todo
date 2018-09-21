@@ -1,8 +1,9 @@
 package app
 
 /*B(Import)*/
-	import "github.com/hailongz/kk-micro/micro"
-	/*E(Import)*/
+import "github.com/hailongz/kk-micro/micro"
+
+/*E(Import)*/
 
 type /*B(Result)*/ UserQueryTaskResult /*E(Result)*/ struct {
 	/*B(Result.Base)*/
@@ -21,12 +22,12 @@ type /*B(Task)*/ UserQueryTask /*E(Task)*/ struct {
 	/*E(Task.Base)*/
 
 	/*B(Input)*/ /*E(Input)*/
+	/*B(Input.rid)*/
+	Rid int64 `json:"rid" title:"根级ID"`
+	/*E(Input.rid)*/
 	/*B(Input.status)*/
 	Status string `json:"status" title:"状态多个逗号分割"`
 	/*E(Input.status)*/
-	/*B(Input.pid)*/
-	Pid int64 `json:"pid" title:"父级ID"`
-	/*E(Input.pid)*/
 	/*B(Input.orderBy)*/
 	OrderBy string `json:"orderBy" title:"desc 降序默认 asc 升序"`
 	/*E(Input.orderBy)*/

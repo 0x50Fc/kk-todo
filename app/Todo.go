@@ -10,6 +10,9 @@ type /*B(Object)*/ Todo /*E(Object)*/ struct {
 	/*E(Object.Base)*/
 
 	/*B(Property)*/ /*E(Property)*/
+	/*B(Property.rid)*/
+	Rid int64 `json:"rid" title:"根级ID"`
+	/*E(Property.rid)*/
 	/*B(Property.maxUserCount)*/
 	MaxUserCount int64 `json:"maxUserCount" title:"最大用户数 0为不限制"`
 	/*E(Property.maxUserCount)*/

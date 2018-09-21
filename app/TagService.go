@@ -34,7 +34,7 @@ func (S *TagService) HandleTagCounterQueryTask(a micro.IApp, task *TagCounterQue
 		return err
 	}
 
-	prefix = Prefix(a, prefix, task.Pid)
+	prefix = Prefix(a, prefix, task.Rid)
 
 	return tag.CounterQuery(conn, prefix, &task.CounterQueryTask)
 }
@@ -51,7 +51,7 @@ func (S *TagService) HandleTagCounterGetTask(a micro.IApp, task *TagCounterGetTa
 		return err
 	}
 
-	prefix = Prefix(a, prefix, task.Pid)
+	prefix = Prefix(a, prefix, task.Rid)
 
 	return tag.CounterGet(conn, prefix, &task.CounterGetTask)
 }
@@ -68,7 +68,7 @@ func (S *TagService) HandleTagQueryTask(a micro.IApp, task *TagQueryTask) error 
 		return err
 	}
 
-	prefix = Prefix(a, prefix, task.Pid)
+	prefix = Prefix(a, prefix, task.Rid)
 
 	return tag.TagQuery(conn, prefix, &task.TagQueryTask)
 }
